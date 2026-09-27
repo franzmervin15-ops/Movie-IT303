@@ -1,60 +1,83 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# Movie-IT303
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
+Movie Explorer is a mobile application built with Expo and React Native. It lets users search for movies and TV series, view item details, and save favorites to a watchlist.
 
-## Get started
+## Features
+- Search for movies and TV titles
+- Filter results by category
+- View details such as genre, description, and release year
+- Add or remove items from a watchlist
+- Save favorites locally on the device
+- Use a dark-themed streaming-style interface
 
-1. Install dependencies
+## Technologies Used
+- Expo
+- React Native
+- JavaScript
+- iTunes Search API
+- AsyncStorage
 
-   ```bash
-   npm install
-   ```
+## Project Structure
+- MovieExplorer/ — main Expo app
+  - src/app/ — screens and navigation
+  - src/services/ — API and storage logic
+  - app.json — app configuration
+  - package.json — dependencies and scripts
 
-2. Start the app
+## How It Works
+The app sends a search query to the iTunes Search API. The response is cleaned and normalized, then displayed in the UI. When the user taps a title, the detail screen loads more information. If the user likes the item, it can be saved to the watchlist using local storage.
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+## Setup and Running
 ```bash
-npm run reset-project
+cd Movie-IT303/MovieExplorer
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Terms and Definitions
+- Expo: framework for building and running React Native apps.
+- React Native: library for creating mobile apps with JavaScript.
+- API: a system that lets an app request data from a server.
+- iTunes Search API: public service used to fetch movie and TV data.
+- Watchlist: saved list of favorite items.
+- AsyncStorage: local storage used to save the watchlist.
+- Screen: one page in the app, such as Search or Watchlist.
+- Route: a navigation path to a specific screen.
+- State: data stored while the app is running, such as search results.
+- View: a container component that groups UI elements together.
+- Text: component used to display text.
+- Image: component used to show a poster or image.
+- Pressable: touchable component used for buttons and cards.
+- FlatList: component used to render a list efficiently.
+- useState: React hook used to store variables in a component.
+- useEffect: React hook used to run code after rendering or when data changes.
 
-### Other setup steps
+### Example: how View works
+```jsx
+<View style={{ backgroundColor: 'black', padding: 20 }}>
+  <Text>Movie Explorer</Text>
+</View>
+```
+This creates a black container with text inside it. The View acts like a box that holds the content together.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Example: how useState works
+```jsx
+const [query, setQuery] = useState('');
+```
+This stores the user's search text. When the user types, the value updates and the screen re-renders.
 
-## Learn more
+## Tags / Keywords
+- Mobile App
+- Expo
+- React Native
+- Movie Search
+- TV Search
+- Watchlist
+- iTunes API
+- Local Storage
+- JavaScript
+- UI Design
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# Movie-IT303
->>>>>>> 497b277abd38f8885b1dfb1c3311782c005cc326
+## Purpose
+This project demonstrates how to build a small mobile app that combines search, navigation, API data, and local storage in one working flow.

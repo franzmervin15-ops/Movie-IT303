@@ -1,59 +1,77 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# Movie-IT303
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
+Movie Explorer is a mobile application developed with Expo and React Native. The app allows users to search for movies and TV series, view details about each title, and save favorites to a personal watchlist.
 
-## Get started
+## Features
+- Search for movies and television titles
+- Filter results by category
+- View item details including description and metadata
+- Add or remove titles from the watchlist
+- Store saved items locally on the device
+- Modern dark-themed UI for a streaming-style experience
 
-1. Install dependencies
+## Technologies Used
+- Expo
+- React Native
+- JavaScript
+- iTunes Search API
+- AsyncStorage for local data persistence
 
+## Project Structure
+- MovieExplorer/ — main Expo application folder
+  - src/app/ — screens and route-based navigation
+  - src/services/ — API and watchlist logic
+  - app.json — Expo project configuration
+  - package.json — dependencies and scripts
+
+## How It Works
+The app uses the public iTunes Search API to fetch movie and TV data based on the user's search. The returned results are normalized into a consistent format and displayed in the UI. Users can select a title to view more details and save it to a local watchlist for later browsing.
+
+## Setup and Running
+To run the project:
+
+1. Open the app folder:
+   ```bash
+   cd Movie-IT303/MovieExplorer
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Start the Expo app:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Notes
+- This top-level README provides the project summary.
+- The README inside the MovieExplorer folder contains the app-specific setup and developer instructions.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Terms and Definitions
+- Expo: a framework for building and running React Native apps. It helps manage the app environment and project setup.
+- React Native: a JavaScript library used to create mobile apps for Android and iOS. It renders native UI components from shared code.
+- API: a system that allows apps to request and receive data from a server. In this project, it fetches movie and TV data from iTunes.
+- iTunes Search API: the public service used to fetch movie and TV information. It provides search results and metadata for titles.
+- Watchlist: a saved list of favorite titles selected by the user. It allows users to keep titles they want to remember or revisit.
+- AsyncStorage: local storage used to keep the watchlist saved on the device. It stores the list even after the app is closed.
+- Screen: an app page such as search, watchlist, or details. Each screen handles a different part of the user experience.
+- Route: a navigation path that opens a specific screen. For example, a route can open the detail page for a selected movie.
+- Filter: an option that narrows results to movies, TV shows, or all items. It helps users refine their search experience.
+- Metadata: additional information such as release year, genre, or artist name. It gives details about each item in the list.
+- State: data stored while the app is running, such as search results or selected filters. State updates when the user interacts with the app.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Tags / Keywords
+- Mobile App
+- Expo
+- React Native
+- Movie Search
+- TV Search
+- Watchlist
+- iTunes API
+- Local Storage
+- UI Design
+- JavaScript
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# Movie-IT303
+## Purpose
+This project demonstrates how to build a small mobile app that combines API-based search, screen navigation, and local storage in a clean and practical user flow.

@@ -38,8 +38,10 @@ export default function WatchlistScreen() {
         </View>
         <FlatList
           data={items}
+          numColumns={2}
           keyExtractor={(item) => `${item.mediaType}-${item.id}`}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          columnWrapperStyle={styles.columns}
+          ItemSeparatorComponent={() => <View style={styles.rowGap} />}
           contentContainerStyle={items.length === 0 ? styles.emptyContent : styles.listContent}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
@@ -47,27 +49,36 @@ export default function WatchlistScreen() {
               <Text style={styles.emptySubtext}>
                 Save a film or series from its details page and it will appear here.
               </Text>
+              <Pressable
+                style={styles.browseButton}
+                accessibilityRole="button"
+                onPress={() => router.push('/')}
+              >
+                <Text style={styles.browseButtonText}>Browse titles</Text>
+              </Pressable>
             </View>
           }
           renderItem={({ item }) => (
-            <Pressable
-              style={styles.row}
-              accessibilityRole="button"
-              accessibilityLabel={`Open ${item.title}`}
-              onPress={() => router.push(`/movie/${item.id}?mediaType=${item.mediaType}`)}
-            >
-              {item.artwork ? (
-                <Image source={{ uri: item.artwork }} style={styles.poster} />
-              ) : (
-                <View style={[styles.poster, styles.posterPlaceholder]} />
-              )}
-              <View style={styles.rowText}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.subtitle}>
-                  {(item.mediaType || 'movie') === 'tv' ? 'TV series' : 'Film'}
-                  {item.releaseDate ? ` · ${item.releaseDate.slice(0, 4)}` : ''}
-                </Text>
-              </View>
+            <View style={styles.card}>
+              <Pressable
+                style={styles.cardMain}
+                accessibilityRole="button"
+                accessibilityLabel={`Open ${item.title}`}
+                onPress={() => router.push(`/movie/${item.id}?mediaType=${item.mediaType}`)}
+              >
+                {item.artwork ? (
+                  <Image source={{ uri: item.artwork }} style={styles.poster} />
+                ) : (
+                  <View style={[styles.poster, styles.posterPlaceholder]} />
+                )}
+                <View style={styles.cardText}>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.subtitle}>
+                    {(item.mediaType || 'movie') === 'tv' ? 'TV series' : 'Film'}
+                    {item.releaseDate ? ` · ${item.releaseDate.slice(0, 4)}` : ''}
+                  </Text>
+                </View>
+              </Pressable>
               <Pressable
                 hitSlop={10}
                 onPress={() => handleRemove(item.id)}
@@ -77,7 +88,7 @@ export default function WatchlistScreen() {
               >
                 <Text style={styles.removeButtonText}>Remove</Text>
               </Pressable>
-            </Pressable>
+            </View>
           )}
         />
       </View>
@@ -86,30 +97,41 @@ export default function WatchlistScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: '#F6F5F1' },
+  screen: { flex: 1, backgroundColor: '#090D12' },
   content: {
     flex: 1,
     width: '100%',
-    maxWidth: 760,
+    maxWidth: 640,
     alignSelf: 'center',
-    paddingHorizontal: 22,
+    paddingHorizontal: 20,
   },
-  header: { paddingTop: 30, paddingBottom: 22 },
-  eyebrow: { color: '#A65E4D', fontSize: 11, fontWeight: '700', letterSpacing: 1.2 },
-  heading: { color: '#252A26', fontFamily: 'Georgia', fontSize: 30, lineHeight: 36, marginTop: 8 },
-  intro: { color: '#686C66', fontSize: 15, lineHeight: 22, marginTop: 6 },
-  listContent: { paddingBottom: 20 },
+  header: { paddingTop: 34, paddingBottom: 22 },
+  eyebrow: { color: '#26D6E7', fontSize: 11, fontWeight: '700', letterSpacing: 1.5 },
+  heading: { color: '#F1F6F7', fontFamily: 'Georgia', fontSize: 30, lineHeight: 36, marginTop: 8 },
+  intro: { color: '#A1AFB9', fontSize: 15, lineHeight: 22, marginTop: 6 },
+  listContent: { paddingBottom: 24 },
   emptyContent: { flexGrow: 1 },
-  emptyContainer: { paddingTop: 18, maxWidth: 340 },
-  emptyText: { color: '#252A26', fontFamily: 'Georgia', fontSize: 20, marginBottom: 7 },
-  emptySubtext: { color: '#686C66', fontSize: 14, lineHeight: 21 },
-  separator: { height: 1, backgroundColor: '#E4E2DC' },
-  row: { flexDirection: 'row', paddingVertical: 12, alignItems: 'center' },
-  poster: { width: 62, height: 90, borderRadius: 4, backgroundColor: '#E8E7E1' },
+  emptyContainer: { padding: 20, maxWidth: 380, backgroundColor: '#141C25', borderColor: '#202C36', borderWidth: 1, borderRadius: 8 },
+  emptyText: { color: '#F1F6F7', fontFamily: 'Georgia', fontSize: 20, marginBottom: 7 },
+  emptySubtext: { color: '#A1AFB9', fontSize: 14, lineHeight: 21 },
+  browseButton: {
+    alignSelf: 'flex-start',
+    marginTop: 18,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 5,
+    backgroundColor: '#20D5E7',
+  },
+  browseButtonText: { color: '#071014', fontSize: 13, fontWeight: '700' },
+  columns: { justifyContent: 'space-between', gap: 14 },
+  rowGap: { height: 14 },
+  card: { flex: 1, backgroundColor: '#141C25', borderColor: '#202C36', borderWidth: 1, borderRadius: 8, padding: 8 },
+  cardMain: { flex: 1 },
+  poster: { width: '100%', height: 220, borderRadius: 5, backgroundColor: '#202B35' },
   posterPlaceholder: {},
-  rowText: { marginLeft: 14, flex: 1 },
-  title: { color: '#252A26', fontSize: 16, fontWeight: '600', lineHeight: 21 },
-  subtitle: { fontSize: 13, color: '#777A74', marginTop: 5 },
-  removeButton: { paddingHorizontal: 4, paddingVertical: 10 },
-  removeButtonText: { color: '#9B5748', fontSize: 13, fontWeight: '600' },
+  cardText: { paddingTop: 10, paddingBottom: 3 },
+  title: { color: '#F1F6F7', fontSize: 15, fontWeight: '600', lineHeight: 20 },
+  subtitle: { fontSize: 12, color: '#82919C', marginTop: 5 },
+  removeButton: { alignSelf: 'flex-start', paddingHorizontal: 4, paddingVertical: 8 },
+  removeButtonText: { color: '#20D5E7', fontSize: 12, fontWeight: '600' },
 });

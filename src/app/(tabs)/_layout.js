@@ -5,10 +5,10 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#A65E4D',
-        tabBarInactiveTintColor: '#777A74',
+        tabBarActiveTintColor: '#20D5E7',
+        tabBarInactiveTintColor: '#82919C',
         tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
-        tabBarStyle: { backgroundColor: '#FBFAF7', borderTopColor: '#E4E2DC' },
+        tabBarStyle: { backgroundColor: '#0E151D', borderTopColor: '#202B35' },
       }}
     >
       <Tabs.Screen name="index" options={{ title: 'Search' }} />

@@ -24,32 +24,32 @@ export default function WebTabLayout() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#F6F5F1' },
+  root: { flex: 1, backgroundColor: '#090D12' },
   tabList: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
-    paddingHorizontal: 24,
-    minHeight: 58,
+    gap: 24,
+    paddingHorizontal: 28,
+    minHeight: 68,
     borderBottomWidth: 1,
-    borderBottomColor: '#E4E2DC',
-    backgroundColor: '#FBFAF7',
+    borderBottomColor: '#202B35',
+    backgroundColor: '#0E151D',
   },
-  brand: { color: '#252A26', fontSize: 11, fontWeight: '700', marginRight: 'auto' },
+  brand: { color: '#EAF2F4', fontSize: 12, fontWeight: '700', letterSpacing: 1.3, marginRight: 'auto' },
   tab: {
-    minHeight: 58,
+    minHeight: 68,
     justifyContent: 'center',
-    paddingHorizontal: 4,
+    paddingHorizontal: 5,
     borderBottomWidth: 2,
     borderBottomColor: 'transparent',
   },
   activeTab: {
-    borderBottomColor: '#A65E4D',
+    borderBottomColor: '#20D5E7',
   },
   tabLabel: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#454943',
+    color: '#A7B5BF',
   },
-  content: { flex: 1, backgroundColor: '#F6F5F1' },
+  content: { flex: 1, backgroundColor: '#090D12' },
 });

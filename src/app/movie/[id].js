@@ -60,7 +60,7 @@ export default function DetailScreen() {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#A65E4D" />
+        <ActivityIndicator size="large" color="#20D5E7" />
       </View>
     );
   }
@@ -108,46 +108,47 @@ export default function DetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F6F5F1' },
+  container: { flex: 1, backgroundColor: '#090D12' },
   content: { padding: 22, paddingTop: 28, alignItems: 'center' },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F6F5F1' },
-  error: { color: '#A13E35', paddingHorizontal: 24, textAlign: 'center', lineHeight: 21 },
-  poster: { width: 210, height: 315, borderRadius: 4, backgroundColor: '#E8E7E1' },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#090D12' },
+  error: { color: '#FF8C85', paddingHorizontal: 24, textAlign: 'center', lineHeight: 21 },
+  poster: { width: 210, height: 315, borderRadius: 8, backgroundColor: '#202B35' },
   eyebrow: {
-    color: '#A65E4D',
+    color: '#26D6E7',
     fontSize: 11,
     fontWeight: '700',
     letterSpacing: 1.2,
     marginTop: 22,
   },
   title: {
-    color: '#252A26',
+    color: '#F1F6F7',
     fontFamily: 'Georgia',
     fontSize: 27,
     lineHeight: 34,
     marginTop: 7,
     textAlign: 'center',
   },
-  meta: { fontSize: 14, color: '#686C66', marginTop: 6, textAlign: 'center', lineHeight: 20 },
+  meta: { fontSize: 14, color: '#A1AFB9', marginTop: 6, textAlign: 'center', lineHeight: 20 },
   bookmarkButton: {
     marginTop: 20,
     paddingVertical: 11,
     paddingHorizontal: 18,
-    borderRadius: 4,
+    borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#A65E4D',
+    borderColor: '#20D5E7',
+    backgroundColor: '#20D5E7',
   },
-  bookmarkButtonActive: { backgroundColor: '#A65E4D' },
-  bookmarkButtonText: { color: '#8E4D40', fontWeight: '600', fontSize: 14 },
-  bookmarkButtonTextActive: { color: '#FFFFFF' },
+  bookmarkButtonActive: { backgroundColor: '#151E28', borderColor: '#263540' },
+  bookmarkButtonText: { color: '#071014', fontWeight: '700', fontSize: 14 },
+  bookmarkButtonTextActive: { color: '#20D5E7' },
   overview: {
     width: '100%',
     maxWidth: 620,
     fontSize: 15,
     lineHeight: 23,
     marginTop: 24,
-    color: '#454943',
+    color: '#D1DBE0',
     textAlign: 'left',
   },
-  overviewMuted: { fontSize: 14, marginTop: 24, color: '#777A74' },
+  overviewMuted: { fontSize: 14, marginTop: 24, color: '#82919C' },
 });

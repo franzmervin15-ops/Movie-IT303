@@ -157,6 +157,69 @@ export default function SearchScreen() {
           )}
         </View>
 
+          {/* RECOMMENDED MOVIES */}
+          {query.trim().length === 0 && (
+            <View style = {styles.recommendedLoading}>
+              <Text style = {styles.recommendedHeading}>
+                Recommended Movies
+              </Text>
+
+              <Text style = {styles.remmendedSubtitle}>
+                Movies you might enjoy
+              </Text>
+
+              <FlatList
+              horizontal
+              showsHorizontalScrollIndicator ={false}
+              data={[
+                {
+                  id: 'interstellar',
+                  title: 'Interstellar',
+                  year: '2014',
+                  artwork:
+                    'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+                },
+                {
+                  id: 'inception',
+                  title: 'Inception',
+                  year: '2010',
+                  artwork:
+                    'https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg',
+
+                },
+                {
+                  id: 'dark-knight',
+                  title: 'The Dark Knight',
+                  year: '2008',
+                  artwork:
+                    'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+                },
+                {
+                  id: 'spider-man',
+                  title: 'Spider-Man: No Way Home',
+                  year: '2021',
+                  artwork:
+                    'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
+                },
+              ]}
+              keyExtracto={(item) => item.id}
+              renderItem={({item}) => (
+                <View style = {styles.recommendedCard}>
+                  <image
+                  source={{uri: item.artwork}}
+                  style = {styles.recommendedPoster}
+                  />
+
+                  <Text stye = {styles.recommendedYear}>
+                    {item.year}
+                  </Text>
+                </View>
+              )}
+              />
+            </View>
+          )}
+
+
         <View style={styles.filters} accessibilityRole="tablist">
           {[
             { key: 'all', label: 'All' },
@@ -297,4 +360,41 @@ const styles = StyleSheet.create({
   saveButtonActive: { backgroundColor: '#20D5E7', borderColor: '#20D5E7' },
   saveButtonText: { color: '#5EE3ED', fontSize: 12, fontWeight: '700' },
   saveButtonTextActive: { color: '#071014' },
+
+  recommendedSection: {
+    marginBottom: 18,
+  },
+
+  recommendedHeading: {
+    color: '#f1F6F7',
+    fontSize: 21,
+    fontWeight: "700",
+    marginBottom: 4,
+  },
+
+  recommendedSubtitle: {
+    color: '#82919C',
+    fontSize: 13,
+    marginBottom: 12,
+  },
+
+  recommendedPoster: {
+    width: 125,
+    height: 180,
+    borderRadius: 8,
+    backgroundColor: '#151B21',
+  },
+
+  recommendedTitle: {
+    color: '#F1F6F7',
+    fontSize: 13,
+    fontWeight: '600',
+    marginTop: 7,
+  },
+
+  recommendedYear: {
+    color: '#82919C',
+    fontSize: 12,
+    marginTop: 3,
+  },
 });

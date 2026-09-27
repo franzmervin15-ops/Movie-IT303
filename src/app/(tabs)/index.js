@@ -205,7 +205,7 @@ export default function SearchScreen() {
               keyExtracto={(item) => item.id}
               renderItem={({item}) => (
                 <View style = {styles.recommendedCard}>
-                  <image
+                  <Image
                   source={{uri: item.artwork}}
                   style = {styles.recommendedPoster}
                   />

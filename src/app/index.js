@@ -1,31 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; // useState = React Hook that lets a component remember data
+
 import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
+  Pressable,   // para sa touchable component
+  ScrollView,  // para sa scrollable container
+  StyleSheet,  // para mag create styles object
+  Text,        // para mag displays text (<Text> for all text)
+  TextInput,   // para san input box where an user mag t-type
+  View,        // ngan basic containers (like <div>)
 } from "react-native";
+
+// nag i-import san the data: "genres" "movies"
 import { genres, movies } from "../data/movies";
 
+//its a function component na exported as default, so an Expo router magamit siya as a screen.
 export default function MoviePrototype() {
-  const [page, setPage] = useState("Discover");
-  const [searchText, setSearchText] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState("All");
-  const [savedIds, setSavedIds] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+ 
+  const [page, setPage] = useState("Discover"); // kun nano na tab an open.
+  const [searchText, setSearchText] = useState(""); // kun nano an gin search san user
+  const [selectedGenre, setSelectedGenre] = useState("All"); // active genre filter
+  const [savedIds, setSavedIds] = useState([]); // IDs san movies na gin saved to sa watchlist
+  const [selectedMovie, setSelectedMovie] = useState(null);// a state variable na nag store mga selected movies, start as null
 
+  // FILTERING: .filter() gin keep an movies nga pass sa three checks below
   const visibleMovies = movies.filter((movie) => {
+    // search: lowercase both sides so "BATMAN" matches "batman"; includes() checks part of the title
     const matchesSearch = movie.title
       .toLowerCase()
       .includes(searchText.toLowerCase());
+    // genre: "All" shows everything, otherwise the genre must match
     const matchesGenre =
       selectedGenre === "All" || movie.genre === selectedGenre;
+    // page: Discover shows all movies, Watchlist shows only the saved ones
     const matchesPage = page === "Discover" || savedIds.includes(movie.id);
-    return matchesSearch && matchesGenre && matchesPage;
+    return matchesSearch && matchesGenre && matchesPage; // movie must satisfy all three
   });
 
+  // ADD / REMOVE from watchlist
   function toggleSaved(movieId) {
     if (savedIds.includes(movieId)) {
       setSavedIds(savedIds.filter((id) => id !== movieId));
@@ -34,6 +44,7 @@ export default function MoviePrototype() {
     }
   }
 
+  // Switching tabs: reset the details, search and genre so each tab starts clean
   function showPage(nextPage) {
     setSelectedMovie(null);
     setSearchText("");
@@ -41,13 +52,15 @@ export default function MoviePrototype() {
     setPage(nextPage);
   }
 
-  return (
+   return (
     <View style={styles.screen}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.page}>
+
+          {/* ===== SHOWN ON ALL PAGES: top bar ===== */}
           <View style={styles.topLine}>
             <Text style={styles.brand}>
               Movie<Text style={styles.brandAccent}>Explorer</Text>
@@ -56,6 +69,10 @@ export default function MoviePrototype() {
           </View>
 
           {selectedMovie ? (
+            /* =====================================================
+               PAGE 3: DETAILS PAGE
+               Shown when a movie was tapped (selectedMovie is not null)
+               ===================================================== */
             <View style={styles.detailPage}>
               <Pressable
                 style={styles.backButton}
@@ -102,24 +119,26 @@ export default function MoviePrototype() {
             </View>
           ) : (
             <>
+              {/* ----- HEADING: BOTH pages, different text ----- */}
               <View style={styles.hero}>
                 <Text style={styles.eyebrow}>
                   {page === "Discover"
-                    ? "A SMALL COLLECTION, PICKED FOR TONIGHT"
-                    : "YOUR PERSONAL SHORTLIST"}
+                    ? "A SMALL COLLECTION, PICKED FOR TONIGHT" // DISCOVER text
+                    : "YOUR PERSONAL SHORTLIST"}               {/* WATCHLIST text */}
                 </Text>
                 <Text style={styles.heading}>
                   {page === "Discover"
-                    ? "Find your next\nfavorite story."
-                    : "Keep the good ones\nclose by."}
+                    ? "Find your next\nfavorite story."        // DISCOVER text
+                    : "Keep the good ones\nclose by."}         {/* WATCHLIST text */}
                 </Text>
                 <Text style={styles.subheading}>
                   {page === "Discover"
-                    ? "Twelve films. No sign-in, no internet, just something good to watch."
-                    : `${savedIds.length} ${savedIds.length === 1 ? "film" : "films"} saved for later.`}
+                    ? "Twelve films. No sign-in, no internet, just something good to watch." // DISCOVER text
+                    : `${savedIds.length} ${savedIds.length === 1 ? "film" : "films"} saved for later.`} {/* WATCHLIST text */}
                 </Text>
               </View>
 
+              {/* ----- DISCOVER ONLY: search box and genre buttons ----- */}
               {page === "Discover" && (
                 <>
                   <View style={styles.searchBox}>
@@ -172,6 +191,7 @@ export default function MoviePrototype() {
                 </>
               )}
 
+              {/* ----- BOTH pages: section title and film count ----- */}
               <View style={styles.sectionHeading}>
                 <Text style={styles.sectionTitle}>
                   {page === "Discover" ? "THE COLLECTION" : "SAVED FILMS"}
@@ -181,12 +201,15 @@ export default function MoviePrototype() {
                 </Text>
               </View>
 
+              {/* ----- BOTH pages: movie grid ----- */}
+              {/* Discover: all movies that match search + genre */}
+              {/* Watchlist: only movies whose id is in savedIds */}
               {visibleMovies.length > 0 ? (
                 <View style={styles.movieGrid}>
                   {visibleMovies.map((movie) => (
                     <View key={movie.id} style={styles.movieCard}>
                       <Pressable
-                        onPress={() => setSelectedMovie(movie)}
+                        onPress={() => setSelectedMovie(movie)} // opens PAGE 3: DETAILS
                         accessibilityRole="button"
                         accessibilityLabel={`View ${movie.title}`}
                       >
@@ -224,6 +247,9 @@ export default function MoviePrototype() {
                   ))}
                 </View>
               ) : (
+                /* ----- EMPTY STATE: no movies to show -----
+                   WATCHLIST: "Nothing saved yet."
+                   DISCOVER:  "No films found." (search/genre has no match) */
                 <View style={styles.emptyState}>
                   <Text style={styles.emptyTitle}>
                     {page === "Watchlist"
@@ -235,6 +261,7 @@ export default function MoviePrototype() {
                       ? "Visit Discover and save a film to see it here."
                       : "Try another title or choose a different genre."}
                   </Text>
+                  {/* WATCHLIST ONLY: button that goes back to Discover */}
                   {page === "Watchlist" && (
                     <Pressable
                       style={styles.textButton}
@@ -252,7 +279,12 @@ export default function MoviePrototype() {
         </View>
       </ScrollView>
 
+      {/* =====================================================
+          SHOWN ON ALL PAGES: BOTTOM NAVIGATION BAR
+          Switches between PAGE 1 (Discover) and PAGE 2 (Watchlist)
+          ===================================================== */}
       <View style={styles.bottomNav}>
+        {/* TAB 1: goes to the DISCOVER (home) page */}
         <Pressable
           style={styles.navItem}
           onPress={() => showPage("Discover")}
@@ -270,6 +302,8 @@ export default function MoviePrototype() {
             <View style={styles.navIndicator} />
           )}
         </Pressable>
+
+        {/* TAB 2: goes to the WATCHLIST page */}
         <Pressable
           style={styles.navItem}
           onPress={() => showPage("Watchlist")}
@@ -292,17 +326,20 @@ export default function MoviePrototype() {
   );
 }
 
+// REUSABLE COMPONENT: draws a fake poster (no image files needed).
+// Props: "movie" = the data object, "large" = bigger version (default false) used on the details page
 function Poster({ movie, large = false }) {
   return (
     <View
       style={[
         styles.poster,
-        large && styles.posterLarge,
-        { backgroundColor: movie.color },
+        large && styles.posterLarge,  // add the large style only when large is true
+        { backgroundColor: movie.color }, // inline style: each movie has its own color from the data
       ]}
     >
       <View style={styles.posterTopLine}>
         <Text style={styles.posterSmallText}>FRAME / {movie.year}</Text>
+        {/* takes the first 2 letters of the movie id and makes them uppercase */}
         <Text style={styles.posterSmallText}>
           NO. {movie.id.slice(0, 2).toUpperCase()}
         </Text>
@@ -312,7 +349,7 @@ function Poster({ movie, large = false }) {
           style={[
             styles.posterMark,
             large && styles.posterMarkLarge,
-            { borderColor: movie.accent },
+            { borderColor: movie.accent },     // circle border uses the movie's accent color
           ]}
         >
           <Text
@@ -338,6 +375,7 @@ function Poster({ movie, large = false }) {
   );
 }
 
+// STYLES: StyleSheet.create nag b-build style objects na gagamit sa igbaw (like CSS, written in JavaScript).
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#111816" },
   scrollContent: { flexGrow: 1 },
